@@ -41,17 +41,25 @@ router.put("/update/:id", async (req, res, next) => {
 
   const query = "UPDATE staff SET biometric_template = ? WHERE id = ?";
   try {
+    // Execute the query to update the biometric template for the specified staff member
     const [result] = await db.query(query, [biometric_template, id]);
+
+    if (result.affectedRows === 0) {
+      // If no rows are affected, the staff with the given id was not found
+      return res.status(404).json({ error: "Staff member not found" });
+    }
+
+    // If successful, return a success response
     res.json({ success: true, message: "Staff updated successfully", result });
   } catch (err) {
-    next(err); // Pass error to the global error handler
+    // Pass any errors to the global error handler
+    next(err);
   }
 });
 
 // Delete staff
 router.delete("/delete/:id", async (req, res, next) => {
   const { id } = req.params;
-
   const query = "DELETE FROM staff WHERE id = ?";
   try {
     const [result] = await db.query(query, [id]);

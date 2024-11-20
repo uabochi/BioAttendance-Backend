@@ -15,19 +15,26 @@ exports.adminLogin = async (req, res) => {
   try {
       const [rows] = await db.query('SELECT * FROM admins WHERE email = ?', [email]);
       if (rows.length === 0) {
+        console.log("first");
           return res.status(404).json({ error: 'Admin not found' });
       }
 
+      console.log("second");
       const admin = rows[0];
-      const isMatch = await bcrypt.compare(pin, admin.pin_hash);
+      console.log('Provided Pin:', pin);
+      console.log('Stored Pin Hash:', admin.pin);
+      const isMatch = await bcrypt.compare(pin, admin.pin);
 
       if (!isMatch) {
+        console.log("third");
           return res.status(401).json({ error: 'Invalid PIN' });
       }
 
+      console.log("forth");
       const token = jwt.sign({ id: admin.id, email: admin.email }, process.env.JWT_SECRET, {
           expiresIn: '1h',
       });
+      console.log("fifth");
 
       res.status(200).json({ message: 'Login successful', token });
   } catch (error) {
