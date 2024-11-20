@@ -1,4 +1,4 @@
-const db = require("../utils/db");
+const db = require('../db');
 
 // Mark Attendance
 exports.markAttendance = async (req, res) => {

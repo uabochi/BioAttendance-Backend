@@ -4,9 +4,9 @@ require("dotenv").config();
 
 async function createAdmin() {
   const admin = {
-    name: "Default Admin", // Change this if needed
-    email: "admin@example.com", // Change this if needed
-    pin: "1234", // Default PIN (must be updated after first login)
+    name: "Uchechukwu Abochi", // Change this if needed
+    email: "uabochi@yahoo.com", // Change this if needed
+    pin: "1111", // Default PIN (must be updated after first login)
   };
 
   try {
