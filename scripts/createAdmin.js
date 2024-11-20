@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const pool = require("../db"); // Adjust the path to your db.js
 require("dotenv").config();
 

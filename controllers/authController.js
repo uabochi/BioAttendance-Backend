@@ -13,7 +13,7 @@ exports.adminLogin = async (req, res) => {
   }
 
   try {
-      const [rows] = await db.query('SELECT * FROM admin WHERE email = ?', [email]);
+      const [rows] = await db.query('SELECT * FROM admins WHERE email = ?', [email]);
       if (rows.length === 0) {
           return res.status(404).json({ error: 'Admin not found' });
       }
