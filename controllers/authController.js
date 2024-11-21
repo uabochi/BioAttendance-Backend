@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const db = require('../db');
 const webauthnUtils = require('../utils/webauthnUtils');
 
-// Example: Get admin details by email
+//Get admin details by email to confirm login details
 exports.adminLogin = async (req, res) => {
   const { email, pin } = req.body;
 
@@ -36,7 +36,7 @@ exports.adminLogin = async (req, res) => {
       });
       console.log("fifth");
 
-      res.status(200).json({ message: 'Login successful', token });
+      res.status(200).json({ message: 'Login successful', name: admin.name, token });
   } catch (error) {
       res.status(500).json({ error: 'Server error', details: error.message });
   }

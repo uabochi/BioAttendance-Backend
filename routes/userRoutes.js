@@ -57,6 +57,8 @@ router.put("/update/:id", async (req, res, next) => {
   }
 });
 
+
+
 // Delete staff
 router.delete("/delete/:id", async (req, res, next) => {
   const { id } = req.params;
