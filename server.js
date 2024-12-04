@@ -14,7 +14,7 @@ require("dotenv").config();
 app.use(cors()); // Enable CORS for cross-origin requests
 app.use(bodyParser.json()); // Parse incoming JSON requests
 
-// Health Check Route
+// Test
 app.get("/", (req, res) => {
   res.status(200).send("Biometric Attendance API is running");
 });
