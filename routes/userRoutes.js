@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db");
 
-// Add a new staff member
+// Add a new student member
 router.post("/add", async (req, res, next) => {
   const { name, email, biometric_template } = req.body;
 
@@ -19,7 +19,7 @@ router.post("/add", async (req, res, next) => {
   }
 });
 
-// Get all staff
+// Get all students
 router.get("/", async (req, res, next) => {
   const query = "SELECT * FROM staff";
   try {
@@ -30,7 +30,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// Update staff biometric data
+// Update student biometric data
 router.put("/update/:id", async (req, res, next) => {
   const { id } = req.params;
   const { biometric_template } = req.body;
@@ -41,7 +41,7 @@ router.put("/update/:id", async (req, res, next) => {
 
   const query = "UPDATE staff SET biometric_template = ? WHERE id = ?";
   try {
-    // Execute the query to update the biometric template for the specified staff member
+    // Execute the query to update the biometric template for the specified student member
     const [result] = await db.query(query, [biometric_template, id]);
 
     if (result.affectedRows === 0) {
@@ -57,9 +57,7 @@ router.put("/update/:id", async (req, res, next) => {
   }
 });
 
-
-
-// Delete staff
+// Delete student
 router.delete("/delete/:id", async (req, res, next) => {
   const { id } = req.params;
   const query = "DELETE FROM staff WHERE id = ?";

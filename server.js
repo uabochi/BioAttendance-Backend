@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 });
 
 // Use Routes
-app.use("/staff", userRoutes);
+app.use("/student", userRoutes);
 app.use("/auth", authRoutes); // Authentication (WebAuthn) routes
 app.use("/attendance", attendanceRoutes); // Attendance management routes
 
