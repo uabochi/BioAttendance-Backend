@@ -36,7 +36,7 @@ exports.adminLogin = async (req, res) => {
       });
       console.log("fifth");
 
-      res.status(200).json({ message: 'Login successful', name: admin.name, token });
+      res.status(200).json({ message: 'Login successful', name: admin.name, id: admin.id, token });
   } catch (error) {
       res.status(500).json({ error: 'Server error', details: error.message });
   }

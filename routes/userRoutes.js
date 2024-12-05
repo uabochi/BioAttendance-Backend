@@ -4,15 +4,15 @@ const db = require("../db");
 
 // Add a new student member
 router.post("/add", async (req, res, next) => {
-  const { name, email, biometric_template } = req.body;
+  const { name, email, created_by } = req.body;
 
   if (!name || !email) {
     return res.status(400).json({ error: "Name and email are required" });
   }
 
-  const query = "INSERT INTO staff (name, email, biometric_template) VALUES (?, ?, ?)";
+  const query = "INSERT INTO staff (name, email, created_by) VALUES (?, ?, ?)";
   try {
-    const [result] = await db.query(query, [name, email, biometric_template || null]);
+    const [result] = await db.query(query, [name, email, created_by || null]);
     res.json({ success: true, message: "Staff added successfully", result });
   } catch (err) {
     next(err); // Pass error to the global error handler
@@ -24,6 +24,18 @@ router.get("/", async (req, res, next) => {
   const query = "SELECT * FROM staff";
   try {
     const [result] = await db.query(query);
+    res.json(result);
+  } catch (err) {
+    next(err); // Pass error to the global error handler
+  }
+});
+
+// Get all students by admin
+router.get("/:created_by", async (req, res, next) => {
+  const {created_by} = req.params;
+  const query = "SELECT * FROM staff WHERE created_by = ?";
+  try {
+    const [result] = await db.query(query, [created_by]);
     res.json(result);
   } catch (err) {
     next(err); // Pass error to the global error handler

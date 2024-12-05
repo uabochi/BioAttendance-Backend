@@ -5,6 +5,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const attendanceRoutes = require("./routes/attendanceRoutes");
 const userRoutes = require("./routes/userRoutes");
+const mailRoutes = require("./routes/mailRoutes")
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 app.use("/student", userRoutes);
 app.use("/auth", authRoutes); // Authentication (WebAuthn) routes
 app.use("/attendance", attendanceRoutes); // Attendance management routes
+app.use("/mail", mailRoutes); // Mail management routes
 
 // Global Error Handler
 app.use((err, req, res, next) => {

@@ -1,5 +1,6 @@
-//userController.js
+const mailController = require("../controllers/mailController");
 const db = require('../utils/db');
+import {sendMail} from "../scripts/sendMail";
 
 // Example: Get user by email
 exports.getUser = async (req, res) => {
@@ -23,7 +24,7 @@ exports.getUser = async (req, res) => {
   };
   
 exports.addStaff = async (req, res) => {
-    const { name, email, biometricTemplate } = req.body;
+    const { name, email, created_by } = req.body;
   
     if (!name || !email) {
       return res.status(400).json({ error: 'Name and email are required' });
@@ -31,10 +32,13 @@ exports.addStaff = async (req, res) => {
   
     try {
       const [result] = await db.query(
-        'INSERT INTO staff (name, email, biometric_template) VALUES (?, ?, ?)',
-        [name, email, biometricTemplate || null]
+        'INSERT INTO staff (name, email, created_by) VALUES (?, ?, ?)',
+        [name, email, created_by || null]
       );
       res.status(201).json({ message: 'Staff added successfully', staffId: result.insertId });
+      sendMail(email, name, result.insertId);
+      
+      // mailController.sendMail()
     } catch (error) {
       if (error.code === 'ER_DUP_ENTRY') {
         return res.status(400).json({ error: 'Email already exists' });
