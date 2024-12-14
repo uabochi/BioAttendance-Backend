@@ -1,4 +1,3 @@
-const mailController = require("../controllers/mailController");
 const db = require('../utils/db');
 import {sendMail} from "../scripts/sendMail";
 
@@ -46,7 +45,6 @@ exports.addStaff = async (req, res) => {
       res.status(500).json({ error: 'Server error', details: error.message });
     }
   };
-  
 
 exports.updateStaffEmail = async (req, res) => {
     const { staffId, newEmail } = req.body;

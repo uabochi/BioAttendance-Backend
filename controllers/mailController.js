@@ -3,23 +3,6 @@ const nodemailer = require("nodemailer");
 // Send Mail
 exports.sendMail = async (req, res) => {
     const { name, email, id } = req.body;
-  
-    // if (!name || !email) {
-    //   return res.status(400).json({ error: 'Name and email are required' });
-    // }
-  
-    // try {
-    //   const [result] = await db.query(
-    //     'INSERT INTO staff (name, email, created_by) VALUES (?, ?, ?)',
-    //     [name, email, created_by || null]
-    //   );
-    //   res.status(201).json({ message: 'Staff added successfully', staffId: result.insertId });
-    // } catch (error) {
-    //   if (error.code === 'ER_DUP_ENTRY') {
-    //     return res.status(400).json({ error: 'Email already exists' });
-    //   }
-    //   res.status(500).json({ error: 'Server error', details: error.message });
-    // }
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
