@@ -24,7 +24,7 @@ async function main() {
     to: email, // list of receivers
     subject: "TrackDem Unique ID!", // Subject line
     text: "Hello world?", // plain text body
-    html: `<b>Hello ${name}, here is your student ID ${id}, do well to keep it save</b>`, // html body
+    html: `<b>Hello ${name}, here is your student ID: ${id}, do well to keep it safe</b>`, // html body
   });
 
   
